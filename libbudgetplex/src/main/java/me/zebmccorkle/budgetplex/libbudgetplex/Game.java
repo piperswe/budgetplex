@@ -1,0 +1,147 @@
+package me.zebmccorkle.budgetplex.libbudgetplex;
+
+import me.zebmccorkle.budgetplex.libbudgetplex.event.PlayerJoinEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+/*
+Budgetplex - An awful version of Mineplex on a budget
+Copyright (C) 2017 Zebulon McCorkle
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/**
+ * An abstract class for games to inherit from. Provides all events needed to run a game.
+ */
+public abstract class Game {
+    // Data and Constructor
+
+    private String name;
+    private Team[] teams;
+    private Kit[] kits;
+
+    private ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+    private Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
+    private org.bukkit.scoreboard.Team[] scoreboardTeams;
+    private Map<String, Integer> teamIndices = new HashMap<>();
+
+    /**
+     * Set the main properties of the game, should only be called as {@code super(...)}.
+     * @param name Game name, will be displayed to players
+     * @param teams Teams players can choose from
+     * @param kits Kits players can choose from
+     */
+    protected Game(String name, Team[] teams, Kit[] kits) {
+        this.name = name;
+        this.teams = teams;
+        this.kits = kits;
+
+        scoreboardTeams = (org.bukkit.scoreboard.Team[]) Arrays.stream(teams)
+                .map(team -> {
+                    org.bukkit.scoreboard.Team scoreboardTeam = scoreboard.registerNewTeam(team.getName());
+                    scoreboardTeam.setPrefix(team.getNametagColor().toString());
+                    return scoreboardTeam;
+                }).toArray();
+
+        for (int i = 0; i < teams.length; i++) {
+            teamIndices.put(teams[i].getName(), i);
+        }
+    }
+
+    /**
+     * Get the display name of the game
+     *
+     * @return Game name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Get the teams available
+     *
+     * @return Teams players can choose from
+     */
+    public Team[] getTeams() {
+        return teams;
+    }
+
+    /**
+     * Get the kits available
+     *
+     * @return Kits players can choose from
+     */
+    public Kit[] getKits() {
+        return kits;
+    }
+
+    // Helper private methods
+
+    /**
+     * Get a {@link Team} by its name
+     *
+     * @param teamName Name of the team
+     * @return {@link Team} where its {@link Team#getName()} is {@code teamName}
+     */
+    private Team getTeamByName(String teamName) {
+        return teams[teamIndices.get(teamName)];
+    }
+
+    /**
+     * Get a {@link org.bukkit.scoreboard.Team} by its name
+     *
+     * @param teamName Name of the team
+     * @return {@link org.bukkit.scoreboard.Team} where the {@link Team#getName()} of its corresponding {@link Team} is
+     *         {@code teamName}
+     */
+    private org.bukkit.scoreboard.Team getScoreboardTeamByName(String teamName) {
+        return scoreboardTeams[teamIndices.get(teamName)];
+    }
+
+    // Methods for subclasses
+
+    /**
+     * Add a player to a team
+     *
+     * @param player {@link Player} to be added
+     * @param teamName Name of the team to add {@code player} to
+     */
+    protected void addPlayerToTeam(Player player, String teamName) {
+        org.bukkit.scoreboard.Team scoreboardTeam = getScoreboardTeamByName(teamName);
+        scoreboardTeam.addEntry(player.getDisplayName());
+    }
+
+    /**
+     * Get the scoreboard, for adding and using objectives
+     *
+     * @return Scoreboard used by the game
+     */
+    protected Scoreboard getScoreboard() {
+        return scoreboard;
+    }
+
+    // Events
+
+    /**
+     * Called when a player joins the game
+     *
+     * @param event Event which contains the {@link Player} who joined
+     */
+    public abstract void onPlayerJoin(PlayerJoinEvent event);
+}
