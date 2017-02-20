@@ -1,7 +1,7 @@
 # Budgetplex
 ## An awful version of Mineplex on a budget
 
-Budgetplex is all in one repository, [Google-style](https://medium.freecodecamp.com/how-google-builds-a-web-framework-5eeddd691de).
+Budgetplex is all in one repository, [Google-style](https://medium.freecodecamp.com/how-google-builds-a-web-framework-5eeddd691dea).
 
 ## Building
 
