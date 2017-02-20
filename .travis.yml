@@ -6,8 +6,7 @@ env:
 # Add new projects here for them to be tested
   - PROJECT=libbudgetplex
 
-install: cd $PROJECT && ./gradlew assemble
-script: cd $PROJECT && ./gradlew check
+before_install: cd $PROJECT
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
