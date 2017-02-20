@@ -1,4 +1,4 @@
-# Budgetplex [![Build Status](https://travis-ci.org/zebMcCorkle/budgetplex.svg?branch=master)](https://travis-ci.org/zebMcCorkle/budgetplex) [![codecov](https://codecov.io/gh/zebMcCorkle/budgetplex/branch/master/graph/badge.svg?token=lduo3AoXLM)](https://codecov.io/gh/zebMcCorkle/budgetplex)
+# Budgetplex [![Build Status](https://travis-ci.org/zebMcCorkle/budgetplex.svg?branch=master)](https://travis-ci.org/zebMcCorkle/budgetplex) [![codecov](https://codecov.io/gh/zebMcCorkle/budgetplex/branch/master/graph/badge.svg?token=lduo3AoXLM)](https://codecov.io/gh/zebMcCorkle/budgetplex) [![Code Climate](https://codeclimate.com/github/zebMcCorkle/budgetplex/badges/gpa.svg)](https://codeclimate.com/github/zebMcCorkle/budgetplex)
 ## An awful version of Mineplex on a budget
 
 Budgetplex is all in one repository, [Google-style](https://medium.freecodecamp.com/how-google-builds-a-web-framework-5eeddd691dea).
