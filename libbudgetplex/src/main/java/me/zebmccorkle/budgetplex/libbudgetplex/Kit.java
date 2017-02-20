@@ -21,16 +21,16 @@ package me.zebmccorkle.budgetplex.libbudgetplex;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * A set of items for players to respawn with
+ * A set of items for players to respawn with.
  */
 public class Kit {
 
   /**
-   * Amount of {@link org.bukkit.inventory.ItemStack}s that will fit into the player armor slots
+   * Amount of {@link org.bukkit.inventory.ItemStack}s that will fit into the player armor slots.
    */
   public static final int STACKS_IN_ARMOR = 4;
   /**
-   * Amount of rows in the player inventory
+   * Amount of rows in the player inventory.
    */
   public static final int ROWS_IN_INVENTORY = 4;
   /**
@@ -39,7 +39,7 @@ public class Kit {
    */
   public static final int COLUMNS_IN_INVENTORY = 9;
   /**
-   * Amount of {@link org.bukkit.inventory.ItemStack}s that will fit into the player inventory
+   * Amount of {@link org.bukkit.inventory.ItemStack}s that will fit into the player inventory.
    */
   // Subtract one from ROWS_IN_INVENTORY as the hotbar shouldn't be included
   public static final int STACKS_IN_INVENTORY = (ROWS_IN_INVENTORY - 1) * COLUMNS_IN_INVENTORY;
@@ -56,13 +56,13 @@ public class Kit {
    * @param id Unique ID, preferably a UUID. Must not change between server restarts or plugin
    *    versions.
    * @param hotbar {@link org.bukkit.inventory.ItemStack}s for the player to spawn with in its
-   *    hotbar
+   *    hotbar.
    * @param armor {@link org.bukkit.inventory.ItemStack}s for the player to spawn equipped with as
-   *    armor
+   *    armor.
    * @param inventory {@link org.bukkit.inventory.ItemStack}s for the player to spawn with in its
-   *    main inventory
+   *    main inventory.
    * @param offhand {@link org.bukkit.inventory.ItemStack} for the player to spawn with in its
-   *    offhand
+   *    offhand.
    */
   public Kit(String id, ItemStack[] hotbar, ItemStack[] armor, ItemStack[] inventory,
       ItemStack offhand) {
