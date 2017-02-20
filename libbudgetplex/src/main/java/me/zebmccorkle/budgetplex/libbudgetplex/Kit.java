@@ -79,6 +79,7 @@ public class Kit {
           "Inventory must contain at most " + STACKS_IN_INVENTORY + "ItemStacks");
     }
 
+    this.id = id;
     this.hotbar = hotbar;
     this.armor = armor;
     this.inventory = inventory;
