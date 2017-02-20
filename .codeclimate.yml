@@ -5,6 +5,9 @@ engines:
     enabled: true
     channel: beta
     config: 'google_checks.xml'
+    checks:
+      com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTagContinuationIndentationCheck:
+        enabled: false
 
 ratings:
   paths:

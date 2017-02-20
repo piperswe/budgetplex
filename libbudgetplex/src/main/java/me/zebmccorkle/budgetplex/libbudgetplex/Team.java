@@ -19,51 +19,53 @@
 package me.zebmccorkle.budgetplex.libbudgetplex;
 
 import org.bukkit.ChatColor;
+
 /**
- * A group of players, typically working together
+ * A group of players, typically working together.
  */
 public class Team {
-    private String name;
-    private ChatColor nametagColor;
-    private boolean canBeChosen;
 
-    /**
-     * Create a team with a name and nametag color
-     *
-     * @param name Team name, will be displayed at team selection
-     * @param nametagColor Color of team members' nametags
-     * @param canBeChosen Whether or not the team should be able to be chosen by players
-     */
-    public Team(String name, ChatColor nametagColor, boolean canBeChosen) {
-        this.name = name;
-        this.nametagColor = nametagColor;
-        this.canBeChosen = canBeChosen;
-    }
+  private String name;
+  private ChatColor nametagColor;
+  private boolean canBeChosen;
 
-    /**
-     * Get the team name
-     *
-     * @return Team name
-     */
-    public String getName() {
-        return name;
-    }
+  /**
+   * Create a team with a name and nametag color.
+   *
+   * @param name Team name, will be displayed at team selection
+   * @param nametagColor Color of team members' nametags
+   * @param canBeChosen Whether or not the team should be able to be chosen by players
+   */
+  public Team(String name, ChatColor nametagColor, boolean canBeChosen) {
+    this.name = name;
+    this.nametagColor = nametagColor;
+    this.canBeChosen = canBeChosen;
+  }
 
-    /**
-     * Get the team nametag color
-     *
-     * @return Color of team members' nametags
-     */
-    public ChatColor getNametagColor() {
-        return nametagColor;
-    }
+  /**
+   * Get the team name.
+   *
+   * @return Team name
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * Get whether or not the team can be chosen by players
-     *
-     * @return Whether or not the team should be able to be chosen by players
-     */
-    public boolean getCanBeChosen() {
-        return canBeChosen;
-    }
+  /**
+   * Get the team nametag color.
+   *
+   * @return Color of team members' nametags
+   */
+  public ChatColor getNametagColor() {
+    return nametagColor;
+  }
+
+  /**
+   * Get whether or not the team can be chosen by players.
+   *
+   * @return Whether or not the team should be able to be chosen by players
+   */
+  public boolean getCanBeChosen() {
+    return canBeChosen;
+  }
 }
