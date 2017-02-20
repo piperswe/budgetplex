@@ -1,3 +1,21 @@
+/*******************************************************************************
+ * Budgetplex
+ * Copyright (C) 2017 Zebulon McCorkle
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************/
+
 package me.zebmccorkle.budgetplex.libbudgetplex;
 
 import me.zebmccorkle.budgetplex.libbudgetplex.event.PlayerJoinEvent;
@@ -9,23 +27,8 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-/*
-Budgetplex - An awful version of Mineplex on a budget
-Copyright (C) 2017 Zebulon McCorkle
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
 /**
  * An abstract class for games to inherit from. Provides all events needed to run a game.
  */
