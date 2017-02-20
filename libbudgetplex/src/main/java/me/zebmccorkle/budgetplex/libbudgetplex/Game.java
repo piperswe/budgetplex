@@ -112,7 +112,7 @@ public abstract class Game {
    *
    * @param teamName Name of the team
    * @return {@link org.bukkit.scoreboard.Team} where the {@link Team#getName()} of its
-   *  corresponding {@link Team} is {@code teamName}
+   * corresponding {@link Team} is {@code teamName}
    */
   private org.bukkit.scoreboard.Team getScoreboardTeamByName(String teamName) {
     return scoreboardTeams[teamIndices.get(teamName)];
