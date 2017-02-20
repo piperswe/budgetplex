@@ -4,6 +4,7 @@ import me.zebmccorkle.budgetplex.libbudgetplex.Game;
 import org.bukkit.entity.Player;
 
 public class PlayerJoinEvent {
+
   private Player player;
 
   /**
