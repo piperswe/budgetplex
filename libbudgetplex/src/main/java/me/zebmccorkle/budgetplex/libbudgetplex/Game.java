@@ -43,6 +43,7 @@ public abstract class Game {
     private Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
     private org.bukkit.scoreboard.Team[] scoreboardTeams;
     private Map<String, Integer> teamIndices = new HashMap<>();
+    private Map<Player, String> teamOfPlayer = new HashMap<>();
 
     /**
      * Set the main properties of the game, should only be called as {@code super(...)}.
@@ -126,8 +127,23 @@ public abstract class Game {
      * @param teamName Name of the team to add {@code player} to
      */
     protected void addPlayerToTeam(Player player, String teamName) {
+        // Remove the player from its current team
+        org.bukkit.scoreboard.Team originalTeam = getScoreboardTeamByName(getTeamOfPlayer(player));
+        originalTeam.removeEntry(player.getDisplayName());
+
+        // Add the player to its new team
         org.bukkit.scoreboard.Team scoreboardTeam = getScoreboardTeamByName(teamName);
         scoreboardTeam.addEntry(player.getDisplayName());
+        teamOfPlayer.put(player, teamName);
+    }
+
+    /**
+     * Get the team a player is on
+     *
+     * @param player {@link Player} to return the team of
+     */
+    protected String getTeamOfPlayer(Player player) {
+        return teamOfPlayer.get(player);
     }
 
     /**
