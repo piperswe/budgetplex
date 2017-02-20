@@ -1,7 +1,3 @@
-import me.zebmccorkle.budgetplex.libbudgetplex.Team;
-import org.bukkit.ChatColor;
-import org.junit.Test;
-
 /*******************************************************************************
  * Budgetplex
  * Copyright (C) 2017 Zebulon McCorkle
@@ -19,6 +15,10 @@ import org.junit.Test;
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
+
+import me.zebmccorkle.budgetplex.libbudgetplex.Team;
+import org.bukkit.ChatColor;
+import org.junit.Test;
 
 public class TestTeam {
     @Test
