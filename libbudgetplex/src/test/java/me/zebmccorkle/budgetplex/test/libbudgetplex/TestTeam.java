@@ -23,45 +23,46 @@ import org.bukkit.ChatColor;
 import org.junit.Test;
 
 public class TestTeam {
-    @Test
-    public void storesNameCorrectly() {
-        String name;
-        Team team;
 
-        name = "Team Name";
-        team = new Team(name, ChatColor.AQUA, true);
-        assert team.getName().equals(name);
+  @Test
+  public void storesNameCorrectly() {
+    String name;
+    Team team;
 
-        name = Double.toString(Math.random());
-        team = new Team(name, ChatColor.GOLD, false);
-        assert team.getName().equals(name);
-    }
+    name = "Team Name";
+    team = new Team(name, ChatColor.AQUA, true);
+    assert team.getName().equals(name);
 
-    @Test
-    public void storesNametagColorCorrectly() {
-        ChatColor color;
-        Team team;
+    name = Double.toString(Math.random());
+    team = new Team(name, ChatColor.GOLD, false);
+    assert team.getName().equals(name);
+  }
 
-        color = ChatColor.AQUA;
-        team = new Team("A Name", color, true);
-        assert team.getNametagColor().equals(color);
+  @Test
+  public void storesNametagColorCorrectly() {
+    ChatColor color;
+    Team team;
 
-        color = ChatColor.UNDERLINE;
-        team = new Team("Another Name", color, false);
-        assert team.getNametagColor().equals(color);
-    }
+    color = ChatColor.AQUA;
+    team = new Team("A Name", color, true);
+    assert team.getNametagColor().equals(color);
 
-    @Test
-    public void storesCanBeChosenCorrectly() {
-        boolean canBeChosen;
-        Team team;
+    color = ChatColor.UNDERLINE;
+    team = new Team("Another Name", color, false);
+    assert team.getNametagColor().equals(color);
+  }
 
-        canBeChosen = true;
-        team = new Team("Woah names many names", ChatColor.BLACK, canBeChosen);
-        assert team.getCanBeChosen() == canBeChosen;
+  @Test
+  public void storesCanBeChosenCorrectly() {
+    boolean canBeChosen;
+    Team team;
 
-        canBeChosen = false;
-        team = new Team("fjhsjkhfjk", ChatColor.MAGIC, canBeChosen);
-        assert team.getCanBeChosen() == canBeChosen;
-    }
+    canBeChosen = true;
+    team = new Team("Woah names many names", ChatColor.BLACK, canBeChosen);
+    assert team.getCanBeChosen() == canBeChosen;
+
+    canBeChosen = false;
+    team = new Team("fjhsjkhfjk", ChatColor.MAGIC, canBeChosen);
+    assert team.getCanBeChosen() == canBeChosen;
+  }
 }
