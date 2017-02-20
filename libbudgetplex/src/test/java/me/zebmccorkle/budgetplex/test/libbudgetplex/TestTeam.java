@@ -16,6 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
+package me.zebmccorkle.budgetplex.test.libbudgetplex;
+
 import me.zebmccorkle.budgetplex.libbudgetplex.Team;
 import org.bukkit.ChatColor;
 import org.junit.Test;
