@@ -21,7 +21,7 @@ package me.zebmccorkle.budgetplex.libbudgetplex;
 import org.bukkit.ChatColor;
 
 /**
- * A group of players, typically working together
+ * A group of players, typically working together.
  */
 public class Team {
 
@@ -30,7 +30,7 @@ public class Team {
   private boolean canBeChosen;
 
   /**
-   * Create a team with a name and nametag color
+   * Create a team with a name and nametag color.
    *
    * @param name Team name, will be displayed at team selection
    * @param nametagColor Color of team members' nametags
@@ -43,7 +43,7 @@ public class Team {
   }
 
   /**
-   * Get the team name
+   * Get the team name.
    *
    * @return Team name
    */
@@ -52,7 +52,7 @@ public class Team {
   }
 
   /**
-   * Get the team nametag color
+   * Get the team nametag color.
    *
    * @return Color of team members' nametags
    */
@@ -61,7 +61,7 @@ public class Team {
   }
 
   /**
-   * Get whether or not the team can be chosen by players
+   * Get whether or not the team can be chosen by players.
    *
    * @return Whether or not the team should be able to be chosen by players
    */

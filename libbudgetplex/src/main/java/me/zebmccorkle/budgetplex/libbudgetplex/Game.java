@@ -69,7 +69,7 @@ public abstract class Game {
   }
 
   /**
-   * Get the display name of the game
+   * Get the display name of the game.
    *
    * @return Game name
    */
@@ -78,7 +78,7 @@ public abstract class Game {
   }
 
   /**
-   * Get the teams available
+   * Get the teams available.
    *
    * @return Teams players can choose from
    */
@@ -87,7 +87,7 @@ public abstract class Game {
   }
 
   /**
-   * Get the kits available
+   * Get the kits available.
    *
    * @return Kits players can choose from
    */
@@ -98,7 +98,7 @@ public abstract class Game {
   // Helper private methods
 
   /**
-   * Get a {@link Team} by its name
+   * Get a {@link Team} by its name.
    *
    * @param teamName Name of the team
    * @return {@link Team} where its {@link Team#getName()} is {@code teamName}
@@ -108,7 +108,7 @@ public abstract class Game {
   }
 
   /**
-   * Get a {@link org.bukkit.scoreboard.Team} by its name
+   * Get a {@link org.bukkit.scoreboard.Team} by its name.
    *
    * @param teamName Name of the team
    * @return {@link org.bukkit.scoreboard.Team} where the {@link Team#getName()} of its
@@ -121,7 +121,7 @@ public abstract class Game {
   // Methods for subclasses
 
   /**
-   * Add a player to a team
+   * Add a player to a team.
    *
    * @param player {@link Player} to be added
    * @param teamName Name of the team to add {@code player} to
@@ -138,7 +138,7 @@ public abstract class Game {
   }
 
   /**
-   * Get the team a player is on
+   * Get the team a player is on.
    *
    * @param player {@link Player} to return the team of
    */
@@ -147,7 +147,7 @@ public abstract class Game {
   }
 
   /**
-   * Get the scoreboard, for adding and using objectives
+   * Get the scoreboard, for adding and using objectives.
    *
    * @return Scoreboard used by the game
    */
@@ -158,7 +158,7 @@ public abstract class Game {
   // Events
 
   /**
-   * Called when a player joins the game
+   * Called when a player joins the game.
    *
    * @param event Event which contains the {@link Player} who joined
    */

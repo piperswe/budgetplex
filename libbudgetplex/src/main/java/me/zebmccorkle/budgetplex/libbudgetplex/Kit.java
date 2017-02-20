@@ -54,15 +54,15 @@ public class Kit {
    * Create a "kit," or set of items players spawn with in a game
    *
    * @param id Unique ID, preferably a UUID. Must not change between server restarts or plugin
-   * versions.
+   *    versions.
    * @param hotbar {@link org.bukkit.inventory.ItemStack}s for the player to spawn with in its
-   * hotbar
+   *    hotbar
    * @param armor {@link org.bukkit.inventory.ItemStack}s for the player to spawn equipped with as
-   * armor
+   *    armor
    * @param inventory {@link org.bukkit.inventory.ItemStack}s for the player to spawn with in its
-   * main inventory
+   *    main inventory
    * @param offhand {@link org.bukkit.inventory.ItemStack} for the player to spawn with in its
-   * offhand
+   *    offhand
    */
   public Kit(String id, ItemStack[] hotbar, ItemStack[] armor, ItemStack[] inventory,
       ItemStack offhand) {
@@ -86,26 +86,26 @@ public class Kit {
   }
 
   /**
-   * Get the unique ID of the kit
+   * Get the unique ID of the kit.
    *
    * @return A unique ID that can be used to identify this kit
    */
-  public String getID() {
+  public String getId() {
     return id;
   }
 
   /**
-   * Get the hash code of the <em>ID</em> of the kit
+   * Get the hash code of the <em>ID</em> of the kit.
    *
-   * @return {@link String#hashCode()} of the result of {@link #getID()}
+   * @return {@link String#hashCode()} of the result of {@link #getId()}
    */
   @Override
   public int hashCode() {
-    return getID().hashCode();
+    return getId().hashCode();
   }
 
   /**
-   * Get the {@link org.bukkit.inventory.ItemStack}s for the player to respawn with in its hotbar
+   * Get the {@link org.bukkit.inventory.ItemStack}s for the player to respawn with in its hotbar.
    *
    * @return Array of {@link org.bukkit.inventory.ItemStack}s in player hotbar (max size {@link
    * #COLUMNS_IN_INVENTORY})
@@ -116,7 +116,7 @@ public class Kit {
 
   /**
    * Get the {@link org.bukkit.inventory.ItemStack}s for the player to respawn with in its armor
-   * slots
+   *    slots.
    *
    * @return Array of {@link org.bukkit.inventory.ItemStack}s in player armor slots (max size {@link
    * #STACKS_IN_ARMOR})
@@ -127,7 +127,7 @@ public class Kit {
 
   /**
    * Get the {@link org.bukkit.inventory.ItemStack}s for the player to respawn with in its main
-   * inventory
+   *    inventory.
    *
    * @return Array of {@link org.bukkit.inventory.ItemStack}s in player main inventory (max size
    * {@link #STACKS_IN_INVENTORY})
@@ -137,7 +137,7 @@ public class Kit {
   }
 
   /**
-   * Get the {@link org.bukkit.inventory.ItemStack} for the player to respawn with in its offhand
+   * Get the {@link org.bukkit.inventory.ItemStack} for the player to respawn with in its offhand.
    *
    * @return {@link org.bukkit.inventory.ItemStack} in player offhand
    */

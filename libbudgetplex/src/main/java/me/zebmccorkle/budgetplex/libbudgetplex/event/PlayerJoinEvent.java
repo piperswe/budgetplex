@@ -4,11 +4,10 @@ import me.zebmccorkle.budgetplex.libbudgetplex.Game;
 import org.bukkit.entity.Player;
 
 public class PlayerJoinEvent {
-
   private Player player;
 
   /**
-   * Create an event to pass to {@link Game#onPlayerJoin(PlayerJoinEvent)}
+   * Create an event to pass to {@link Game#onPlayerJoin(PlayerJoinEvent)}.
    *
    * @param player Player that has joined
    */
@@ -17,7 +16,7 @@ public class PlayerJoinEvent {
   }
 
   /**
-   * Get the player that has joined
+   * Get the player that has joined.
    *
    * @return Player that has joined
    */
