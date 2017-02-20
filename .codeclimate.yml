@@ -1,0 +1,11 @@
+engines:
+  fixme:
+    enabled: true
+  checkstyle:
+    enabled: true
+    channel: beta
+    config: 'google_checks.xml'
+
+ratings:
+  paths:
+  - "**.java"
