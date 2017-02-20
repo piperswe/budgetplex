@@ -18,149 +18,149 @@
 
 package me.zebmccorkle.budgetplex.libbudgetplex;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import me.zebmccorkle.budgetplex.libbudgetplex.event.PlayerJoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 
 /**
  * An abstract class for games to inherit from. Provides all events needed to run a game.
  */
 public abstract class Game {
-    // Data and Constructor
+  // Data and Constructor
 
-    private String name;
-    private Team[] teams;
-    private Kit[] kits;
+  private String name;
+  private Team[] teams;
+  private Kit[] kits;
 
-    private ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-    private Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
-    private org.bukkit.scoreboard.Team[] scoreboardTeams;
-    private Map<String, Integer> teamIndices = new HashMap<>();
-    private Map<Player, String> teamOfPlayer = new HashMap<>();
+  private ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+  private Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
+  private org.bukkit.scoreboard.Team[] scoreboardTeams;
+  private Map<String, Integer> teamIndices = new HashMap<>();
+  private Map<Player, String> teamOfPlayer = new HashMap<>();
 
-    /**
-     * Set the main properties of the game, should only be called as {@code super(...)}.
-     * @param name Game name, will be displayed to players
-     * @param teams Teams players can choose from
-     * @param kits Kits players can choose from
-     */
-    protected Game(String name, Team[] teams, Kit[] kits) {
-        this.name = name;
-        this.teams = teams;
-        this.kits = kits;
+  /**
+   * Set the main properties of the game, should only be called as {@code super(...)}.
+   *
+   * @param name Game name, will be displayed to players
+   * @param teams Teams players can choose from
+   * @param kits Kits players can choose from
+   */
+  protected Game(String name, Team[] teams, Kit[] kits) {
+    this.name = name;
+    this.teams = teams;
+    this.kits = kits;
 
-        scoreboardTeams = (org.bukkit.scoreboard.Team[]) Arrays.stream(teams)
-                .map(team -> {
-                    org.bukkit.scoreboard.Team scoreboardTeam = scoreboard.registerNewTeam(team.getName());
-                    scoreboardTeam.setPrefix(team.getNametagColor().toString());
-                    return scoreboardTeam;
-                }).toArray();
+    scoreboardTeams = (org.bukkit.scoreboard.Team[]) Arrays.stream(teams)
+        .map(team -> {
+          org.bukkit.scoreboard.Team scoreboardTeam = scoreboard.registerNewTeam(team.getName());
+          scoreboardTeam.setPrefix(team.getNametagColor().toString());
+          return scoreboardTeam;
+        }).toArray();
 
-        for (int i = 0; i < teams.length; i++) {
-            teamIndices.put(teams[i].getName(), i);
-        }
+    for (int i = 0; i < teams.length; i++) {
+      teamIndices.put(teams[i].getName(), i);
     }
+  }
 
-    /**
-     * Get the display name of the game
-     *
-     * @return Game name
-     */
-    public String getName() {
-        return name;
-    }
+  /**
+   * Get the display name of the game
+   *
+   * @return Game name
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * Get the teams available
-     *
-     * @return Teams players can choose from
-     */
-    public Team[] getTeams() {
-        return teams;
-    }
+  /**
+   * Get the teams available
+   *
+   * @return Teams players can choose from
+   */
+  public Team[] getTeams() {
+    return teams;
+  }
 
-    /**
-     * Get the kits available
-     *
-     * @return Kits players can choose from
-     */
-    public Kit[] getKits() {
-        return kits;
-    }
+  /**
+   * Get the kits available
+   *
+   * @return Kits players can choose from
+   */
+  public Kit[] getKits() {
+    return kits;
+  }
 
-    // Helper private methods
+  // Helper private methods
 
-    /**
-     * Get a {@link Team} by its name
-     *
-     * @param teamName Name of the team
-     * @return {@link Team} where its {@link Team#getName()} is {@code teamName}
-     */
-    private Team getTeamByName(String teamName) {
-        return teams[teamIndices.get(teamName)];
-    }
+  /**
+   * Get a {@link Team} by its name
+   *
+   * @param teamName Name of the team
+   * @return {@link Team} where its {@link Team#getName()} is {@code teamName}
+   */
+  private Team getTeamByName(String teamName) {
+    return teams[teamIndices.get(teamName)];
+  }
 
-    /**
-     * Get a {@link org.bukkit.scoreboard.Team} by its name
-     *
-     * @param teamName Name of the team
-     * @return {@link org.bukkit.scoreboard.Team} where the {@link Team#getName()} of its corresponding {@link Team} is
-     *         {@code teamName}
-     */
-    private org.bukkit.scoreboard.Team getScoreboardTeamByName(String teamName) {
-        return scoreboardTeams[teamIndices.get(teamName)];
-    }
+  /**
+   * Get a {@link org.bukkit.scoreboard.Team} by its name
+   *
+   * @param teamName Name of the team
+   * @return {@link org.bukkit.scoreboard.Team} where the {@link Team#getName()} of its
+   * corresponding {@link Team} is {@code teamName}
+   */
+  private org.bukkit.scoreboard.Team getScoreboardTeamByName(String teamName) {
+    return scoreboardTeams[teamIndices.get(teamName)];
+  }
 
-    // Methods for subclasses
+  // Methods for subclasses
 
-    /**
-     * Add a player to a team
-     *
-     * @param player {@link Player} to be added
-     * @param teamName Name of the team to add {@code player} to
-     */
-    protected void addPlayerToTeam(Player player, String teamName) {
-        // Remove the player from its current team
-        org.bukkit.scoreboard.Team originalTeam = getScoreboardTeamByName(getTeamOfPlayer(player));
-        originalTeam.removeEntry(player.getDisplayName());
+  /**
+   * Add a player to a team
+   *
+   * @param player {@link Player} to be added
+   * @param teamName Name of the team to add {@code player} to
+   */
+  protected void addPlayerToTeam(Player player, String teamName) {
+    // Remove the player from its current team
+    org.bukkit.scoreboard.Team originalTeam = getScoreboardTeamByName(getTeamOfPlayer(player));
+    originalTeam.removeEntry(player.getDisplayName());
 
-        // Add the player to its new team
-        org.bukkit.scoreboard.Team scoreboardTeam = getScoreboardTeamByName(teamName);
-        scoreboardTeam.addEntry(player.getDisplayName());
-        teamOfPlayer.put(player, teamName);
-    }
+    // Add the player to its new team
+    org.bukkit.scoreboard.Team scoreboardTeam = getScoreboardTeamByName(teamName);
+    scoreboardTeam.addEntry(player.getDisplayName());
+    teamOfPlayer.put(player, teamName);
+  }
 
-    /**
-     * Get the team a player is on
-     *
-     * @param player {@link Player} to return the team of
-     */
-    protected String getTeamOfPlayer(Player player) {
-        return teamOfPlayer.get(player);
-    }
+  /**
+   * Get the team a player is on
+   *
+   * @param player {@link Player} to return the team of
+   */
+  protected String getTeamOfPlayer(Player player) {
+    return teamOfPlayer.get(player);
+  }
 
-    /**
-     * Get the scoreboard, for adding and using objectives
-     *
-     * @return Scoreboard used by the game
-     */
-    protected Scoreboard getScoreboard() {
-        return scoreboard;
-    }
+  /**
+   * Get the scoreboard, for adding and using objectives
+   *
+   * @return Scoreboard used by the game
+   */
+  protected Scoreboard getScoreboard() {
+    return scoreboard;
+  }
 
-    // Events
+  // Events
 
-    /**
-     * Called when a player joins the game
-     *
-     * @param event Event which contains the {@link Player} who joined
-     */
-    public abstract void onPlayerJoin(PlayerJoinEvent event);
+  /**
+   * Called when a player joins the game
+   *
+   * @param event Event which contains the {@link Player} who joined
+   */
+  public abstract void onPlayerJoin(PlayerJoinEvent event);
 }
