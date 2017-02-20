@@ -41,5 +41,6 @@ public class TestKit {
     assert kit.hashCode() == id.hashCode();
   }
 
-  // Not testing ItemStacks until the full Spigot jar is included in builds. Not sure when that'll be.
+  // Not testing ItemStacks until the full Spigot jar is included in builds.
+  // Not sure when that'll be.
 }
