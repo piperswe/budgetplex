@@ -1,27 +1,26 @@
-/*******************************************************************************
- * Budgetplex
- * Copyright (C) 2017 Zebulon McCorkle
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+/*-----------------------------------------------------------------------------
+ - Budgetplex                                                                 -
+ - Copyright (C) 2017 Zebulon McCorkle                                        -
+ -                                                                            -
+ - This program is free software: you can redistribute it and/or modify       -
+ - it under the terms of the GNU Affero General Public License as             -
+ - published by the Free Software Foundation, either version 3 of the         -
+ - License, or (at your option) any later version.                            -
+ -                                                                            -
+ - This program is distributed in the hope that it will be useful,            -
+ - but WITHOUT ANY WARRANTY; without even the implied warranty of             -
+ - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              -
+ - GNU Affero General Public License for more details.                        -
+ -                                                                            -
+ - You should have received a copy of the GNU Affero General Public License   -
+ - along with this program.  If not, see <http://www.gnu.org/licenses/>.      -
+ -----------------------------------------------------------------------------*/
 
 package me.zebmccorkle.budgetplex.libbudgetplex;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import me.zebmccorkle.budgetplex.libbudgetplex.event.PlayerJoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
@@ -43,6 +42,8 @@ public abstract class Game {
   private org.bukkit.scoreboard.Team[] scoreboardTeams;
   private Map<String, Integer> teamIndices = new HashMap<>();
   private Map<Player, String> teamOfPlayer = new HashMap<>();
+  private Map<Player, Map<String, Object>> playerState = new HashMap<>();
+  private boolean gameRunning = false;
 
   /**
    * Set the main properties of the game, should only be called as {@code super(...)}.
@@ -86,6 +87,8 @@ public abstract class Game {
     return teams;
   }
 
+  // Helper private methods
+
   /**
    * Get the kits available.
    *
@@ -94,8 +97,6 @@ public abstract class Game {
   public Kit[] getKits() {
     return kits;
   }
-
-  // Helper private methods
 
   /**
    * Get a {@link Team} by its name.
@@ -107,6 +108,8 @@ public abstract class Game {
     return teams[teamIndices.get(teamName)];
   }
 
+  // Methods for subclasses
+
   /**
    * Get a {@link org.bukkit.scoreboard.Team} by its name.
    *
@@ -117,8 +120,6 @@ public abstract class Game {
   private org.bukkit.scoreboard.Team getScoreboardTeamByName(String teamName) {
     return scoreboardTeams[teamIndices.get(teamName)];
   }
-
-  // Methods for subclasses
 
   /**
    * Add a player to a team.
@@ -141,10 +142,13 @@ public abstract class Game {
    * Get the team a player is on.
    *
    * @param player {@link Player} to return the team of
+   * @return The team {@code player} belongs to
    */
   protected String getTeamOfPlayer(Player player) {
     return teamOfPlayer.get(player);
   }
+
+  // State
 
   /**
    * Get the scoreboard, for adding and using objectives.
@@ -155,12 +159,84 @@ public abstract class Game {
     return scoreboard;
   }
 
+  /**
+   * Set a property on a player.
+   *
+   * @param player The {@link Player} to set a property on
+   * @param property The name of the property to set
+   * @param value The value to set the property to
+   */
+  protected void setPlayerProperty(Player player, String property, Object value) {
+    if (!playerState.containsKey(player)) {
+      playerState.put(player, new HashMap<>());
+    }
+
+    playerState.get(player).put(property, value);
+  }
+
+  /**
+   * Get a player's property.
+   *
+   * @param player The {@link Player} to get a property from
+   * @param property The name of the property to get
+   * @return The value of the property
+   */
+  protected Object getPlayerProperty(Player player, String property) {
+    if (!playerState.containsKey(player) || !playerState.get(player).containsKey(property)) {
+      return null;
+    } else {
+      return playerState.get(player).get(property);
+    }
+  }
+
+  /**
+   * Gets whether or not the game is running.
+   *
+   * @return Whether or not the game is running
+   */
+  protected boolean isGameRunning() {
+    return gameRunning;
+  }
+
+  /**
+   * Starts the game.
+   */
+  protected void startGame() {
+    gameRunning = true;
+    onGameStart();
+  }
+
+  /**
+   * Ends the game, prematurely or not.
+   */
+  protected void endGame() {
+    gameRunning = false;
+    onGameEnd();
+  }
+
   // Events
 
   /**
    * Called when a player joins the game.
    *
-   * @param event Event which contains the {@link Player} who joined
+   * @param player The {@link Player} who has joined
    */
-  public abstract void onPlayerJoin(PlayerJoinEvent event);
+  public abstract void onPlayerJoin(Player player);
+
+  /**
+   * Called when a player leaves the game.
+   *
+   * @param player The {@link Player} who has left
+   */
+  public abstract void onPlayerLeave(Player player);
+
+  /**
+   * Called when the game starts.
+   */
+  public abstract void onGameStart();
+
+  /**
+   * Called when the game ends.
+   */
+  public abstract void onGameEnd();
 }
