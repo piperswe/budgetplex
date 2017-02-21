@@ -1,0 +1,6 @@
+name: LibBudgetplex
+version: 1.0-SNAPSHOT
+description: The library backing every Budgetplex plugin
+load: STARTUP
+author: zebMcCorkle
+main: me.zebmccorkle.budgetplex.libbudgetplex.LibBungee
