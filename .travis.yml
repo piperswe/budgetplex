@@ -3,13 +3,18 @@ jdk:
   - oraclejdk8
 
 env:
+  global:
+    - secure: "W0L3uSgbX6opcM+69WcNCwHZCasHAWQB/3yIXaAmbTWwlI230TuyJdFx4ATu+yHAgUWt/7yw8kfzb2O930kw4uf5stprv1OgVvWmeRM6CRzIJdex8X7F0l8gz1mY+KYXQBIYKfRiAU/Su7X9cHv1bKz9RZlWsktSpPso7tNKIaj+Dhm331hybi1o1L4is1YQ+8V/r/7KPazSq+SbiXGm43HLnYhIdly2nqf7y5UTBayg777LZIFTmjKFzH5ncTWwCRSiKdazCKZenSVhw7630PVlPsPHHC71azvfgXqDA5LXGbu7WPvcWlPqtaLWO2tGISwFI4jdMaZtkb1ST2sRGriQ6vMwc1bx9i7QoEdbOARrqGob+MJO42rE43j2ptOXUNHJLc+hz1Gxz8jNCOgn59uOacDAGbi9v13EFNArERQkhVItqSRYJF6y0/Zb3QsP+KAxikWuQBeYhY2tT4LNYF3djv2UEQIq4wwEz2siKN0WO1+zGKCUJFLyPAnfZsx1679cnOxz9giiUkpN190c06W1Fc3zqiQfQWGn5t3Gu0Ls3IKOpUvYAw58qcsnnfnwroDgnj/1o+9/Ewmt47H+m/dXEOVbKGSBRrknKbEHQyl30hIfRE9XsodKUjNJ3Sit7d4iLWXdfvPTJ9yBLA/8LPeRu8plgQPYELp7Hjw0d74="
 # Add new projects here for them to be tested
-  - PROJECT=libbudgetplex
+  matrix:
+    - PROJECT=libbudgetplex
 
 before_install: cd $PROJECT
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - ./gradlew javadoc
+  - cd .. && .utility/initiate-publish.sh
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

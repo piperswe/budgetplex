@@ -10,7 +10,7 @@
 
 ## Documentation
 
-Once Travis gets set up, Javadocs should be available at <https://zebmccorkle.github.io/budgetplex/libbudgetplex>.
+Javadocs are available at <https://zebmccorkle.github.io/budgetplex/javadoc/libbudgetplex>.
 
 ## Usage
 
