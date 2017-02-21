@@ -18,37 +18,57 @@
 
 package me.zebmccorkle.budgetplex.libbudgetplex;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import org.bukkit.plugin.java.JavaPlugin;
+import java.io.InputStreamReader;
+import java.net.Socket;
 
-public class LibPlugin extends JavaPlugin {
+/**
+ * A client to the gamequery protocol.
+ */
+public class GameQueryClient {
 
-  private GameQueryServer queryServer;
-  private Game currentGame;
+  private String ip;
+  private int port;
 
-  @Override
-  public void onEnable() {
-    saveDefaultConfig();
-    queryServer = new GameQueryServer(getConfig().getInt("game-query-port"), currentGame);
-    try {
-      queryServer.listen();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+  /**
+   * Create a client to the gamequery protocol.
+   *
+   * @param ip IP address of the server
+   * @param port Port the server is listening on
+   */
+  public GameQueryClient(String ip, int port) {
+    this.ip = ip;
+    this.port = port;
   }
 
-  @Override
-  public void onDisable() {
-    queryServer.close();
+  private String request(String command) throws IOException {
+    Socket socket = new Socket(ip, port);
+    DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+    out.writeBytes(command + "\n");
+    return in.readLine();
   }
 
-  public Game getGame() {
-    return currentGame;
+  /**
+   * Get the server's game status.
+   *
+   * @return Whether or not the game is running on the server
+   * @throws IOException Produced on network error
+   */
+  public boolean isGameRunning() throws IOException {
+    return Boolean.parseBoolean(request("isGameRunning"));
   }
 
-  private void setGame(Game game) {
-    currentGame.endGame();
-    currentGame = game;
-    queryServer.setGame(game);
+  /**
+   * Get the server's current game.
+   *
+   * @return The server's current game's display name
+   * @throws IOException Produced on network error
+   */
+  public String gameName() throws IOException {
+    return request("gameName");
   }
 }

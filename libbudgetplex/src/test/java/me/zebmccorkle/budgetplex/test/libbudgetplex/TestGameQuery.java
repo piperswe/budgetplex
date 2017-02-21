@@ -16,39 +16,55 @@
  - along with this program.  If not, see <http://www.gnu.org/licenses/>.      -
  -----------------------------------------------------------------------------*/
 
-package me.zebmccorkle.budgetplex.libbudgetplex;
+package me.zebmccorkle.budgetplex.test.libbudgetplex;
 
 import java.io.IOException;
-import org.bukkit.plugin.java.JavaPlugin;
+import me.zebmccorkle.budgetplex.libbudgetplex.Game;
+import me.zebmccorkle.budgetplex.libbudgetplex.GameQueryClient;
+import me.zebmccorkle.budgetplex.libbudgetplex.GameQueryServer;
+import me.zebmccorkle.budgetplex.libbudgetplex.Kit;
+import me.zebmccorkle.budgetplex.libbudgetplex.Team;
+import org.bukkit.entity.Player;
+import org.junit.Test;
 
-public class LibPlugin extends JavaPlugin {
+public class TestGameQuery {
+  private static class TestingGame extends Game {
 
-  private GameQueryServer queryServer;
-  private Game currentGame;
+    protected TestingGame() {
+      super("TestingGame", new Team[0], new Kit[0]);
+    }
 
-  @Override
-  public void onEnable() {
-    saveDefaultConfig();
-    queryServer = new GameQueryServer(getConfig().getInt("game-query-port"), currentGame);
-    try {
-      queryServer.listen();
-    } catch (IOException e) {
-      e.printStackTrace();
+    @Override
+    public void onPlayerJoin(Player player) {
+
+    }
+
+    @Override
+    public void onPlayerLeave(Player player) {
+
+    }
+
+    @Override
+    public void onGameStart() {
+
+    }
+
+    @Override
+    public void onGameEnd() {
+
     }
   }
 
-  @Override
-  public void onDisable() {
-    queryServer.close();
-  }
+  @Test
+  public void isGameRunning() throws IOException {
+    Game game = new TestingGame();
+    GameQueryServer server = new GameQueryServer(9000, game);
+    GameQueryClient client = new GameQueryClient("localhost", 9000);
 
-  public Game getGame() {
-    return currentGame;
-  }
+    server.listen();
 
-  private void setGame(Game game) {
-    currentGame.endGame();
-    currentGame = game;
-    queryServer.setGame(game);
+    assert client.isGameRunning() == game.isGameRunning();
+
+    server.close();
   }
 }
