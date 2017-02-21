@@ -31,3 +31,8 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+
+javadoc {
+    options.addStringOption('link', 'https://docs.oracle.com/javase/8/docs/api/')
+    options.addStringOption('link', 'https://hub.spigotmc.org/javadocs/bukkit/')
+}
