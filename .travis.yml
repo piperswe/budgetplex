@@ -10,7 +10,8 @@ before_install: cd $PROJECT
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - cd .. && .utility/initiate-publish.sh 
+  - ./gradlew javadoc
+  - cd .. && .utility/initiate-publish.sh
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
