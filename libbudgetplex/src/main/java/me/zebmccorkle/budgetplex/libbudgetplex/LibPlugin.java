@@ -42,5 +42,13 @@ public class LibPlugin extends JavaPlugin {
     queryServer.close();
   }
 
+  public Game getGame() {
+    return currentGame;
+  }
+
+  private void setGame(Game game) {
+    currentGame.endGame();
+    currentGame = game;
+    queryServer.setGame(game);
   }
 }
