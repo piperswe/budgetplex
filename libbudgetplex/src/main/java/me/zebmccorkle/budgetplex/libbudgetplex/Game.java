@@ -99,6 +99,15 @@ public abstract class Game {
   }
 
   /**
+   * Gets whether or not the game is running.
+   *
+   * @return Whether or not the game is running
+   */
+  public boolean isGameRunning() {
+    return gameRunning;
+  }
+
+  /**
    * Get a {@link Team} by its name.
    *
    * @param teamName Name of the team
@@ -187,15 +196,6 @@ public abstract class Game {
     } else {
       return playerState.get(player).get(property);
     }
-  }
-
-  /**
-   * Gets whether or not the game is running.
-   *
-   * @return Whether or not the game is running
-   */
-  protected boolean isGameRunning() {
-    return gameRunning;
   }
 
   /**
